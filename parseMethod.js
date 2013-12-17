@@ -163,6 +163,10 @@ ParseMethod.prototype.returnItem = function() {
  */
 
 //Should probably refactor to not use `this.X`
+/**
+ * composeMarkdown creates a markdown string (with md syntax) from a comment
+ * @return {String} The Markdown string of the comment
+ */
 ParseMethod.prototype.composeMarkdown = function() {
   // Working markdown string
   var wMd = '';

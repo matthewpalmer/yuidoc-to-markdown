@@ -56,6 +56,10 @@ General.prototype.stripStartingSpace = function(comment) {
   return comment.replace(/^\ /, '');
 };
 
+General.prototype.stripEndingSpace = function(comment) {
+  return comment.replace(/\ $/g, '');
+};
+
 /**
  * [stripComment description] strips the starting and ending comment markers
  * @param  {String} comment A comment string

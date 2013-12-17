@@ -63,10 +63,21 @@ describe('ParseMethod', function() {
   });
 
   it('should parse the description', function() {
-
+    var desc = pm.description();
+    var exp = 'My method description.  Like other pieces of your comment blocks, this can span multiple lines.';
+    assert.equal(desc, exp);
   });
 
   it('should parse the return item', function() {
-    var returnItem = pm.returnItem();
+    // Make string for easy comparison
+    var returnItem = pm.returnItem() + '';
+    var exp = {
+      type: 'Boolean',
+      description: 'Returns true on success'
+    };
+
+    exp = exp + '';
+
+    assert.equal(returnItem, exp);
   });
 });

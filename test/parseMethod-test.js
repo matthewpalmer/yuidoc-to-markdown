@@ -80,4 +80,9 @@ describe('ParseMethod', function() {
 
     assert.equal(returnItem, exp);
   });
+
+  it('should parse a comment properly and form markdown', function() {
+    var pMd = pm.composeMarkdown();
+    assert.equal(pMd, expectedMdFile);
+  });
 });

@@ -11,6 +11,15 @@ function ParseMethod(comment) {
   this.comment = gen.stripStartingSpace(this.comment);
   this.arrayOfLines = this.comment.split('\n');
 
+  this.mdDict = {
+    mName: '##',
+    mParams: '###',
+    pName: '####',
+    pType: '`', // Goes on either side `code`
+    rType:'###'
+
+  };
+
   // Good point for optimisation
   // Refactor?
   for (var i = 0; i < this.arrayOfLines.length; i++) {
@@ -26,6 +35,11 @@ function ParseMethod(comment) {
     paramName: /\ ([^)]+)\ /,
     descr: (/^(?!\@).+/)
   };
+
+  this.methodNameString = this.methodName();
+  this.paramsArray = this.params();
+  this.descriptionString = this.description();
+  this.returnItemObj = this.returnItem();
 }
 
 ParseMethod.prototype.methodName = function() {
@@ -102,6 +116,12 @@ ParseMethod.prototype.description = function() {
   return desc;
 };
 
+/**
+ * [returnItem description] parses the return item of a method
+ * @return {Object} The object of the return item
+ *                               type: returnType,
+                          description: d,
+ */
 ParseMethod.prototype.returnItem = function() {
   for (var i = 0; i < this.arrayOfLines.length; i++) {
    if (this.arrayOfLines[i].match(this.REGEXES.returnItem)) {
@@ -126,6 +146,47 @@ ParseMethod.prototype.returnItem = function() {
     }
   }
   return "No return found";
+};
+
+/*
+  this.mdDict = {
+    mName: '##',
+    mParams: '###',
+    pName: '####',
+    pType: '`', // Goes on either side eg `code`
+    rType:'###'
+
+  };
+
+  parameters
+ *                       name: , type: , description: ,
+ */
+
+//Should probably refactor to not use `this.X`
+ParseMethod.prototype.composeMarkdown = function() {
+  // Working markdown string
+  var wMd = '';
+  // Add the method name
+  wMd = wMd + this.mdDict.mName + ' ' + this.methodNameString + '\n';
+  // Add the description
+  wMd = wMd + '\n' + this.descriptionString + '\n';
+  // Add the parameters
+  wMd = wMd + '\n' + this.mdDict.mParams + ' Arguments' + '\n';
+  // Could possibly optimise by forming fragments then adding
+  for (var i = 0; i < this.paramsArray.length; i++) {
+    // Parameter name
+    wMd = wMd + '\n' + this.mdDict.pName + ' ' + this.paramsArray[i].name + '\n';
+    // Parameter type
+    wMd = wMd + '\n' + this.mdDict.pType + this.paramsArray[i].type + this.mdDict.pType + '\n';
+    // Paramter description
+    wMd = wMd + '\n' + this.paramsArray[i].description + '\n';
+  }
+  // Return type, description
+  wMd = wMd + '\n' + this.mdDict.rType + ' Return' + '\n';
+  wMd = wMd + '\n' + this.mdDict.pType + this.returnItemObj.type + this.mdDict.pType + '\n';
+  wMd = wMd + '\n' + this.returnItemObj.description + '\n';
+
+  return wMd;
 };
 
 

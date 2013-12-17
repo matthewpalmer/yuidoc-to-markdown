@@ -2,7 +2,7 @@
 
 My method description.  Like other pieces of your comment blocks, this can span multiple lines.
 
-### Parameters
+### Arguments
 
 #### foo
 
@@ -32,7 +32,7 @@ A callback function on the config object
 
 `Boolean`
 
-Do extra, optional work.
+Do extra, optional work
 
 ### Return
 

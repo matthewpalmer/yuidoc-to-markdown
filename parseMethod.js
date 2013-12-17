@@ -2,6 +2,7 @@ var General = require('./general');
 
 var gen = new General();
 
+// Refactor these into an init() method?
 function ParseMethod(comment) {
 
   // Strip extraneous data

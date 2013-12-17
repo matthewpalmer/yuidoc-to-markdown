@@ -35,16 +35,38 @@ describe('ParseMethod', function() {
   it('should parse the methodName', function() {
     var methName = pm.methodName();
     var exp = 'methodName';
-    console.log(methName);
     assert.equal(methName, exp);
 
   });
 
   it('should parse to an array of parameters', function() {
-    var arrayOfParams = pm.params(methodJSFile);
+    // Convert to strings to allow for easier comparison
+    var arrayOfParams = pm.params() + '';
+    var exp = [
+  { name: 'foo',
+    type: 'String',
+    description: 'Argument 1' },
+  { name: 'config',
+    type: 'Object',
+    description: 'A config object' },
+  { name: 'config.name',
+    type: 'String',
+    description: 'The name on the config object' },
+  { name: 'config.callback',
+    type: 'Function',
+    description: 'A callback function on the config object' },
+  { name: '[extra=false]',
+    type: 'Boolean',
+    description: 'Do extra, optional work' } ] + '';
+
+    assert.equal(arrayOfParams, exp);
+  });
+
+  it('should parse the description', function() {
+
   });
 
   it('should parse the return item', function() {
-    var returnItem = pm.returnItem(methodJSFile);
+    var returnItem = pm.returnItem();
   });
 });

@@ -10,6 +10,15 @@ var CONSTANTS = {
  * Test ParseClass
  */
 // Set up a ParseClass instance
+//
+/*
+
+
+TODO: Add tests for multiple line descriptions
+
+
+ */
+//
 var ParseClass = require('../parseClass');
 var pc = new ParseClass();
 
@@ -23,7 +32,7 @@ var classMDContents = fs.readFileSync(CONSTANTS.testCases + 'classblock.md',
 var parsedJSComments = pc.parseClassComment(classJSContents);
 
 // These tests should be more unit-y
-describe('parseClass', function() {
+describe('ParseClass', function() {
   it('should parse js CLASS comments to md', function() {
     assert.equal(parsedJSComments, classMDContents);
   });

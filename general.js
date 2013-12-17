@@ -44,8 +44,7 @@ General.prototype.getMultipleBlockComments = function(fileContents) {
  */
 General.prototype.stripAsterix = function(comment) {
   // Remove the asterixes and the starting space
-  comment = comment.replace(/\*/g, '');
-  return comment;
+  return comment.replace(/\*/g, '');
 };
 
 /**
@@ -54,8 +53,7 @@ General.prototype.stripAsterix = function(comment) {
  * @return {String}         A comment string without any beginning spaces
  */
 General.prototype.stripStartingSpace = function(comment) {
-  comment = comment.replace(/^\ /g, '');
-  return comment;
+  return comment.replace(/^\ /, '');
 };
 
 /**
@@ -72,7 +70,6 @@ General.prototype.stripComment = function(comment) {
   // I don't know why I have to do this twice but I do.
   comment = comment.replace(/^\//g, '');
   comment = comment.replace(/\/$/g, '');
-
   return comment;
 };
 
